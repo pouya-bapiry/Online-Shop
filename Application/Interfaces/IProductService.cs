@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Infrastructure.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    public class IProductService
+    public interface IProductService
     {
-       
+        Task<List<ProductDto>> GetAll();
+        Task<ProductDto> Get(int id);
+        Task<ProductDto> Add(ProductDto model);
     }
 }
+ 

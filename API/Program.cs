@@ -1,3 +1,8 @@
+using Application.Interfaces;
+using Application.Services;
+using Core;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +12,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+string connectionString = builder.Configuration.GetConnectionString("SqlConnection");
+
+
+builder.Services.AddDbContext<OnlineShopDbContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
+
+builder.Services.AddScoped<IProductService, ProductService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
