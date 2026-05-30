@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Infrastructure.Dto;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace API.Controllers
 {
@@ -15,10 +16,18 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
-        { 
+        [
+            SwaggerOperation(
+      Summary = "Get a Product",
+      Description = "Get a Product with id",
+      OperationId = "Products.Get",
+      Tags = new[] { "ProductController" })
+        ]
         
-            var result=await productService.Get(id);
+        public async Task<IActionResult> Get(int id)
+        {
+
+            var result = await productService.Get(id);
             return Ok(result);
 
         }
@@ -26,7 +35,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result=await productService.GetAll();
+            var result = await productService.GetAll();
             return Ok(result);
         }
 

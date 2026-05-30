@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.FluentApiConfigurations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,11 @@ namespace Core
         }
 
         public DbSet<Product> Products => Set<Product>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new ProductEntityConfiguration());
+
+        }
     }
 }

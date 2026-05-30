@@ -13,7 +13,7 @@ namespace Core.Entities
     {
         [Key]
         public int Id { get; set; }
-        [MaxLength(120),Required]
+        
         public string ProductName { get; set; }
         public long Price { get; set; }
     }
