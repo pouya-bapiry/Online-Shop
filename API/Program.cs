@@ -27,6 +27,16 @@ builder.Services.AddDbContext<OnlineShopDbContext>(options =>
 });
 
 builder.Services.AddScoped<IProductService, ProductService>();
+
+//register AutoMapper
+var config = new AutoMapper.MapperConfiguration(cfg =>
+{
+    cfg.AddProfile(new Application.AutoMapperConfig());
+});
+var mapper = config.CreateMapper();
+builder.Services.AddSingleton(mapper);
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
