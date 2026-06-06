@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application.CQRS.ProductCommandQuery.Query;
+using AutoMapper;
 using Core.Entities;
 using Infrastructure.Dto;
 using System;
@@ -19,6 +20,11 @@ namespace Application
             CreateMap<Product, ProductDto>()
             .ForMember(dest => dest.PriceWithComma, opt => opt.MapFrom(src => src.Price.ToString("###,###")))
             .ReverseMap();
+
+            CreateMap<Product, GetProductQueryResponse>()
+              .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.ProductName.ToUpper()))
+              .ForMember(dest => dest.PriceWithComma, opt => opt.MapFrom(src => String.Format("{0:n0}", src.Price)));
+
         }
 
     }
